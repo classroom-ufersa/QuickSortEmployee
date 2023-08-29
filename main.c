@@ -1,3 +1,7 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
 int main(void){
   int n;
       printf("Digite a quantidade de funcionarios: \n");
