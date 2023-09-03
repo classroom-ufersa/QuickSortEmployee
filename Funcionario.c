@@ -12,7 +12,7 @@ void preencher(Funcionario *funcionario, int n)
 {
     for (int i = 0; i < n; i++)
     {
-        printf("\n\tFuncionario %i\n", i ++);
+        printf("\n\tFuncionario %i\n", i+1);
 
         printf("Nome: ");
         scanf(" %[^\n]", funcionario[i].nome);
@@ -28,7 +28,7 @@ void imprimir(Funcionario *funcionario, int n)
     printf("\n**Funcionarios cadastrados**\n");
     for (int i = 0; i < n; i++)
     {
-        printf("Funcionario %i\n", i + 1);
+        printf("Funcionario %i\n", i+1);
         printf("Nome: %s\n", funcionario[i].nome);
         printf("Cargo: %s\n", funcionario[i].cargo);
         printf("Documento: %d\n", funcionario[i].documento);
