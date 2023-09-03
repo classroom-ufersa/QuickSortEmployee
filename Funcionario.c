@@ -71,6 +71,7 @@ void criarArquivo(Funcionario *funcionario, int n)
 
     for (int i = 0; i < n; i++)
     {
+<<<<<<< HEAD
         fprintf(arquivo, "%s\t", funcionario[i].nome);
         fprintf(arquivo, "%s\t", funcionario[i].cargo);
         fprintf(arquivo, "%d\t\n", funcionario[i].documento);
@@ -78,4 +79,54 @@ void criarArquivo(Funcionario *funcionario, int n)
 
     fclose(arquivo);
     printf("Dados salvos em 'funcionarios.txt'\n");
+=======
+        printf("\n\tFuncionario %i\n", i+1);
+
+        printf("Nome: ");
+        scanf(" %[^\n]", funcionario[i].nome);
+        printf("Cargo: ");
+        scanf(" %[^\n]", funcionario[i].cargo);
+        printf("Documento: ");
+        scanf("%d", &funcionario[i].documento);
+    }
+}
+
+void imprimir(Funcionario *funcionario, int n)
+{
+    printf("\n**Funcionarios cadastrados**\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("Funcionario %i\n", i+1);
+        printf("Nome: %s\n", funcionario[i].nome);
+        printf("Cargo: %s\n", funcionario[i].cargo);
+        printf("Documento: %d\n", funcionario[i].documento);
+    }
+}
+
+int main(void)
+{
+    Funcionario *funcionario = NULL;
+    int n = 0, opcao;
+
+    while (opcao != 2)
+    {
+        funcionario = (Funcionario *)realloc(funcionario, (n + 1) * sizeof(Funcionario));
+
+        if (funcionario == NULL)
+        {
+            printf("Memoria insuficiente!\n");
+            exit(1);
+        }
+
+        printf("Registrar novo funcionario?\n1 = Sim\t2 = Nao: ");
+        scanf("%d", &opcao);
+        n++;
+        preencher(funcionario, n);
+    }
+        imprimir(funcionario, n);
+
+    free(funcionario);
+
+    return 0;
+>>>>>>> 016e93cc1bc22b8cd59ba7094eca051666b1ce7c
 }
