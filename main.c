@@ -3,10 +3,7 @@
 #include <string.h>
 #include "funcionario.c"
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 016e93cc1bc22b8cd59ba7094eca051666b1ce7c
 int main(void)
 {
     Funcionario *funcionario = NULL;
@@ -26,15 +23,6 @@ int main(void)
         case 1:
             while (1)
             {
-<<<<<<< HEAD
-=======
-
-                if (opcao == 2)
-                {
-                    break;
-                }
-
->>>>>>> 016e93cc1bc22b8cd59ba7094eca051666b1ce7c
                 funcionario = (Funcionario *)realloc(funcionario, (n + 1) * sizeof(Funcionario));
 
                 if (funcionario == NULL)
@@ -45,7 +33,6 @@ int main(void)
 
                 preencher(&funcionario[n]); // Passa o endereço do funcionário atual
                 n++;
-<<<<<<< HEAD
 
                 printf("Registrar novo funcionario?\n1 = Sim\t2 = Nao: ");
                 scanf("%d", &opcao);
@@ -61,15 +48,6 @@ int main(void)
 
         case 2:
             imprimirArquivo();
-=======
-                printf("Registrar novo funcionario?\n1 = Sim\t2 = Nao: ");
-                scanf("%d", &opcao);
-            }
-        break;
-
-        case 2:
-            imprimir(funcionario, n);
->>>>>>> 016e93cc1bc22b8cd59ba7094eca051666b1ce7c
             break;
 
         case 3:
@@ -83,15 +61,8 @@ int main(void)
 
     } while (opcao != 3);
 
-<<<<<<< HEAD
 
     free(funcionario);
 
     return 0;
 }
-=======
-    free(funcionario);
-
-    return 0;
-}
->>>>>>> 016e93cc1bc22b8cd59ba7094eca051666b1ce7c
