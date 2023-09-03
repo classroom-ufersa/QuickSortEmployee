@@ -53,8 +53,8 @@ int main(void)
         printf("Registrar novo funcionario?\n1 = Sim\t2 = Nao: ");
         scanf("%d", &opcao);
         n++;
-    }
         preencher(funcionario, n);
+    }
         imprimir(funcionario, n);
 
     free(funcionario);
