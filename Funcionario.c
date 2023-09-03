@@ -8,56 +8,74 @@ typedef struct
     int documento;
 } Funcionario;
 
-void preencher(Funcionario *funcionario, int n)
+void preencher(Funcionario *funcionario)
 {
-    for (int i = 0; i < n; i++)
-    {
-        printf("\n\tFuncionario %i\n", i ++);
-
-        printf("Nome: ");
-        scanf(" %[^\n]", funcionario[i].nome);
-        printf("Cargo: ");
-        scanf(" %[^\n]", funcionario[i].cargo);
-        printf("Documento: ");
-        scanf("%d", &funcionario[i].documento);
-    }
+    printf("Nome: ");
+    scanf(" %[^\n]", funcionario->nome);
+    printf("Cargo: ");
+    scanf(" %[^\n]", funcionario->cargo);
+    printf("Documento: ");
+    scanf("%d", &funcionario->documento);
 }
 
-void imprimir(Funcionario *funcionario, int n)
+int compararFuncionarios(const void *a, const void *b)
 {
-    printf("\n**Funcionarios cadastrados**\n");
-    for (int i = 0; i < n; i++)
-    {
-        printf("Funcionario %i\n", i + 1);
-        printf("Nome: %s\n", funcionario[i].nome);
-        printf("Cargo: %s\n", funcionario[i].cargo);
-        printf("Documento: %d\n", funcionario[i].documento);
-    }
+    const Funcionario *funcionarioA = (const Funcionario *)a;
+    const Funcionario *funcionarioB = (const Funcionario *)b;
+    return strcmp(funcionarioA->nome, funcionarioB->nome);
 }
 
-int main(void)
+void imprimirArquivo()
 {
-    Funcionario *funcionario = NULL;
-    int n = 0, opcao;
-
-    while (opcao != 2)
+    FILE *arquivo = fopen("funcionarios.txt", "r");
+    if (arquivo == NULL)
     {
-        funcionario = (Funcionario *)realloc(funcionario, (n + 1) * sizeof(Funcionario));
-
-        if (funcionario == NULL)
-        {
-            printf("Memoria insuficiente!\n");
-            exit(1);
-        }
-
-        printf("Registrar novo funcionario?\n1 = Sim\t2 = Nao: ");
-        scanf("%d", &opcao);
-        n++;
-        preencher(funcionario, n);
+        printf("Erro ao abrir o arquivo para leitura.\n");
+        return;
     }
-        imprimir(funcionario, n);
 
-    free(funcionario);
+    char linha[100];
 
-    return 0;
+    while (fgets(linha, sizeof(linha), arquivo) != NULL)
+    {
+        printf("%s", linha); // Imprime a linha do arquivo
+    }
+
+    fclose(arquivo);
+}
+
+void criarArquivo(Funcionario *funcionario, int n)
+{
+    // Abra o arquivo em modo anexar para adicionar os dados
+    FILE *arquivo = fopen("funcionarios.txt", "a");
+
+    if (arquivo == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    // Verifique se o arquivo está vazio
+    fseek(arquivo, 0, SEEK_END);
+    int arquivoVazio = ftell(arquivo) == 0;
+    rewind(arquivo);
+
+    if (arquivoVazio)
+    {
+        fprintf(arquivo, "*Funcionários cadastrados (ordenados por nome)*\n");
+        fprintf(arquivo, "Nome\t Cargo\t Documento\t\n");
+    }
+
+    // Ordenar os funcionários antes de escrevê-los no arquivo
+    qsort(funcionario, n, sizeof(Funcionario), compararFuncionarios);
+
+    for (int i = 0; i < n; i++)
+    {
+        fprintf(arquivo, "%s\t", funcionario[i].nome);
+        fprintf(arquivo, "%s\t", funcionario[i].cargo);
+        fprintf(arquivo, "%d\t\n", funcionario[i].documento);
+    }
+
+    fclose(arquivo);
+    printf("Dados salvos em 'funcionarios.txt'\n");
 }
