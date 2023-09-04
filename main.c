@@ -48,6 +48,7 @@ int main(void)
             ordenarLinhasArquivo();
         break;
         case 2:
+            ordenarLinhasArquivo();
             imprimirArquivo();
             break;
 
