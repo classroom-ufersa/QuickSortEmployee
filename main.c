@@ -8,7 +8,6 @@ int main(void)
 {
     Funcionario *funcionario = NULL;
     int n = 0, opcao;
-
     do
     {
         printf("\nMenu:\n");
@@ -23,7 +22,7 @@ int main(void)
         case 1:
             while (1)
             {
-                funcionario = (Funcionario *)realloc(funcionario, (n + 1) * sizeof(Funcionario));
+                funcionario = (Funcionario *)realloc(funcionario, (n+1) * sizeof(Funcionario));
 
                 if (funcionario == NULL)
                 {
@@ -42,10 +41,12 @@ int main(void)
                     break;
                 }
             }
-
-         criarArquivo(funcionario, n);
+            criarArquivo(funcionario,n);
+            free(funcionario);
+            funcionario = NULL;
+            n=0;
+            ordenarLinhasArquivo();
         break;
-
         case 2:
             imprimirArquivo();
             break;
