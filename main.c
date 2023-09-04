@@ -20,7 +20,7 @@ int main(void)
         switch (opcao)
         {
         case 1:
-            while (1)
+            while (opcao != 2)
             {
                 funcionario = (Funcionario *)realloc(funcionario, (n+1) * sizeof(Funcionario));
 
@@ -35,11 +35,6 @@ int main(void)
 
                 printf("Registrar novo funcionario?\n1 = Sim\t2 = Nao: ");
                 scanf("%d", &opcao);
-
-                if (opcao == 2)
-                {
-                    break;
-                }
             }
             criarArquivo(funcionario,n);
             free(funcionario);
