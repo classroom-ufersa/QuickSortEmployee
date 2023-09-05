@@ -1,12 +1,17 @@
 #ifndef FUNCIONARIOS_H
 #define FUNCIONARIOS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
 // Definição da estrutura Funcionario que representa os dados de um funcionário
 typedef struct
 {
-    char nome[30];      // Nome do funcionário
-    char cargo[30];     // Cargo do funcionário
-    int documento;      // Número de documento do funcionário
+    char nome[30];  // Nome do funcionário
+    char cargo[30]; // Cargo do funcionário
+    int documento;  // Número de documento do funcionário
 } Funcionario;
 
 // Função para transformar a primeira letra do nome/cargo em maiúscula e o restante em minúscula
