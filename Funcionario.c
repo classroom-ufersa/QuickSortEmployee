@@ -1,21 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "funcionario.h"
 
-typedef struct
-{
-    char nome[30], cargo[30];
-    int documento;
-} Funcionario;
+void capitalizeString(char *str) {
+    if (str[0] != '\0') {
+        str[0] = toupper(str[0]);
+        for (int i = 1; str[i] != '\0'; i++) {
+            str[i] = tolower(str[i]);
+        }
+    }
+}
 
-void preencher(Funcionario *funcionario)
-{
+void preencher(Funcionario *funcionario) {
     printf("Nome: ");
     scanf(" %[^\n]", funcionario->nome);
+    capitalizeString(funcionario->nome); // Formata o nome
     printf("Cargo: ");
     scanf(" %[^\n]", funcionario->cargo);
+    capitalizeString(funcionario->cargo); // Formata o cargo
     printf("Documento: ");
-    scanf("%d", &funcionario->documento);
+    int valorValido = 0;
+
+    while (!valorValido) {
+        if (scanf("%d", &funcionario->documento) == 1) {
+            valorValido = 1;
+        } else {
+            printf("Documento invalido. Digite um numero inteiro valido para o documento.\n");
+            while (getchar() != '\n');
+        }
+    }
 }
 
 
@@ -53,7 +67,7 @@ void criarArquivo(Funcionario *funcionario, int n)
     char linha[100];
     while (fgets(linha, sizeof(linha), arquivoVerificacao) != NULL)
     {
-        if (strstr(linha, "*Funcionários cadastrados*") != NULL)
+        if (strstr(linha, "Funcionarios cadastrados") != NULL)
         {
             cabecalhoExiste = 1;
             break;
@@ -73,7 +87,7 @@ void criarArquivo(Funcionario *funcionario, int n)
 
     if (!cabecalhoExiste)
     {
-        fprintf(arquivo, "*Funcionários cadastrados*\n");
+        fprintf(arquivo, "Funcionarios cadastrados\n");
         fprintf(arquivo, "Nome\t Cargo\t Documento\t\n");
     }
     for (int i = 0; i < n; i++)
@@ -117,6 +131,7 @@ void ordenarLinhasArquivo() {
     fclose(arquivo);
 
     // Ordena as linhas usando qsort
+    
     qsort(linhas, numLinhas, sizeof(char *), compararLinhas);
 
     // Reabre o arquivo em modo de escrita (sobrescrevendo o conteúdo existente)
@@ -126,7 +141,7 @@ void ordenarLinhasArquivo() {
         exit(1);
     }
     
-    fprintf(arquivo, "*Funcionários cadastrados*\n");
+    fprintf(arquivo, "Funcionarios cadastrados\n");
     fprintf(arquivo, "Nome\t Cargo\t Documento\t\n");
 
     // Escreve as linhas ordenadas de volta para o arquivo
@@ -136,5 +151,5 @@ void ordenarLinhasArquivo() {
     }
 
     fclose(arquivo);
-    free(linhas);
+    free(linhas);
 }
