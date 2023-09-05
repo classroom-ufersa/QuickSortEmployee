@@ -1,18 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "funcionario.h"
 
-void capitalizeString(char *str) {
-    if (str[0] != '\0') {
+void capitalizeString(char *str)
+{
+    if (str[0] != '\0')
+    {
         str[0] = toupper(str[0]);
-        for (int i = 1; str[i] != '\0'; i++) {
+        for (int i = 1; str[i] != '\0'; i++)
+        {
             str[i] = tolower(str[i]);
         }
     }
 }
 
-void preencher(Funcionario *funcionario) {
+void preencher(Funcionario *funcionario)
+{
     printf("Nome: ");
     scanf(" %[^\n]", funcionario->nome);
     capitalizeString(funcionario->nome); // Formata o nome
@@ -22,21 +23,25 @@ void preencher(Funcionario *funcionario) {
     printf("Documento: ");
     int valorValido = 0;
 
-    while (!valorValido) {
-        if (scanf("%d", &funcionario->documento) == 1) {
+    while (!valorValido)
+    {
+        if (scanf("%d", &funcionario->documento) == 1)
+        {
             valorValido = 1;
-        } else {
+        }
+        else
+        {
             printf("Documento invalido. Digite um numero inteiro valido para o documento.\n");
-            while (getchar() != '\n');
+            while (getchar() != '\n')
+                ;
         }
     }
 }
 
-
-int compararLinhas(const void *a, const void *b) {
+int compararLinhas(const void *a, const void *b)
+{
     return strcmp(*(const char **)a, *(const char **)b);
 }
-
 
 void imprimirArquivo()
 {
@@ -96,16 +101,17 @@ void criarArquivo(Funcionario *funcionario, int n)
         fprintf(arquivo, "%s\t", funcionario[i].cargo);
         fprintf(arquivo, "%d\t\n", funcionario[i].documento);
     }
-    
+
     fclose(arquivo);
 
     printf("Dados salvos em 'funcionarios.txt'\n");
 }
 
-
-void ordenarLinhasArquivo() {
+void ordenarLinhasArquivo()
+{
     FILE *arquivo = fopen("funcionarios.txt", "r");
-    if (arquivo == NULL) {
+    if (arquivo == NULL)
+    {
         printf("Erro ao abrir o arquivo");
         exit(1);
     }
@@ -115,11 +121,13 @@ void ordenarLinhasArquivo() {
     int numLinhas = 0;
     int linhaAtual = 0; // Variável de controle para ignorar as duas primeiras linhas
 
-    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
-        if (linhaAtual >= 2) { // Ignora as duas primeiras linhas
+    while (fgets(linha, sizeof(linha), arquivo) != NULL)
+    {
+        if (linhaAtual >= 2)
+        { // Ignora as duas primeiras linhas
             // Remove o caractere de nova linha
             linha[strcspn(linha, "\n")] = '\0';
-            
+
             // Aloca memória para a linha e copia o conteúdo
             linhas = realloc(linhas, (numLinhas + 1) * sizeof(char *));
             linhas[numLinhas] = strdup(linha);
@@ -131,25 +139,29 @@ void ordenarLinhasArquivo() {
     fclose(arquivo);
 
     // Ordena as linhas usando qsort
-    
+    clock_t inicio = clock();
+    // Executar o algoritmo
     qsort(linhas, numLinhas, sizeof(char *), compararLinhas);
-
+    double tempo = (double)(clock() - inicio) / CLOCKS_PER_SEC;
+    tempo = tempo * 1000; // milisegundos
     // Reabre o arquivo em modo de escrita (sobrescrevendo o conteúdo existente)
     arquivo = fopen("funcionarios.txt", "w");
-    if (arquivo == NULL) {
+    if (arquivo == NULL)
+    {
         printf("Erro ao abrir o arquivo para escrita");
         exit(1);
     }
-    
+
     fprintf(arquivo, "Funcionarios cadastrados\n");
     fprintf(arquivo, "Nome\t Cargo\t Documento\t\n");
 
     // Escreve as linhas ordenadas de volta para o arquivo
-    for (int i = 0; i < numLinhas; i++) {
+    for (int i = 0; i < numLinhas; i++)
+    {
         fprintf(arquivo, "%s\n", linhas[i]);
         free(linhas[i]); // Libera a memória alocada para a linha
     }
 
     fclose(arquivo);
-    free(linhas);
+    free(linhas);
 }
