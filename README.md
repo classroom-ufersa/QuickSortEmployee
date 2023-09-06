@@ -68,7 +68,7 @@ Para utilizar o programa, siga as seguintes etapas:
 5. Os dados dos funcionários serão armazenados em um arquivo chamado "funcionarios.txt".
 
 # Função QuickSort
-O Quicksort é um algoritmo de ordenação eficiente que divide a lista em subgrupos, rearranja esses grupos em relação a um pivô e depois os combina para obter a lista ordenada. Ele é rápido na maioria dos casos, com complexidade média de O(nlogn), mas pode ser lento no pior caso  O(n 2 )) se o pivô for escolhido inadequadamente.
+O Quicksort é um algoritmo de ordenação eficiente que divide a lista em subgrupos, rearranja esses grupos em relação a um pivô e depois os combina para obter a lista ordenada. Ele é rápido na maioria dos casos, com complexidade média de O(n log n), mas pode ser lento no pior caso  O(n^2) se o pivô for escolhido inadequadamente.
 
 ## Como funciona
 A Quicksort é um algoritmo de ordenação que funciona seguindo três passos simples:
@@ -119,17 +119,17 @@ void swap(int* a, int* b) {
 }
 ```
 
-**Melhor Caso:** O melhor caso ocorre quando o Quicksort divide a lista de entrada em partes iguais em cada chamada recursiva. Isso leva a um desempenho mais rápido, e a complexidade de tempo é \(O(n \log n)\).
+**Melhor Caso:** O melhor caso ocorre quando o Quicksort divide a lista de entrada em partes iguais em cada chamada recursiva. Isso leva a um desempenho mais rápido, e a complexidade de tempo é O(n log n).
 
-**Caso Médio:** No cenário mais realista, o Quicksort divide a lista de entrada de forma desigual em algumas chamadas recursivas, mas a média de todas as chamadas ainda resulta em \(O(n \log n)\).
+**Caso Médio:** No cenário mais realista, o Quicksort divide a lista de entrada de forma desigual em algumas chamadas recursivas, mas a média de todas as chamadas ainda resulta em O(n log n).
 
-**Pior Caso:** O pior caso ocorre quando o Quicksort sempre escolhe o pivô de forma que apenas um elemento seja colocado em uma sublista e os outros (n-1) elementos em outra. Isso leva a (n) chamadas recursivas, cada uma lidando com um único elemento, resultando em um desempenho significativamente mais lento. A complexidade de tempo no pior caso é \(O(n^2)\).
-Em resumo, o Quicksort geralmente tem um desempenho rápido, com complexidade \(O(n \log n)\) na maioria dos casos. No entanto, é importante estar ciente do pior caso, que pode ser evitado com estratégias adequadas de escolha do pivô e otimização do algoritmo.
+**Pior Caso:** O pior caso ocorre quando o Quicksort sempre escolhe o pivô de forma que apenas um elemento seja colocado em uma sublista e os outros (n-1) elementos em outra. Isso leva a (n) chamadas recursivas, cada uma lidando com um único elemento, resultando em um desempenho significativamente mais lento. A complexidade de tempo no pior caso é O(n^2).
+Em resumo, o Quicksort geralmente tem um desempenho rápido, com complexidade O(n log n) na maioria dos casos. No entanto, é importante estar ciente do pior caso, que pode ser evitado com estratégias adequadas de escolha do pivô e otimização do algoritmo.
 
 
 ## Vantagens:
 
-**Eficiência na Maioria dos Casos:** O Quicksort é notavelmente eficiente na maioria dos cenários, especialmente em listas grandes. Sua complexidade média é \(O(n \log n)\), tornando-o mais rápido do que muitos outros algoritmos de ordenação.
+**Eficiência na Maioria dos Casos:** O Quicksort é notavelmente eficiente na maioria dos cenários, especialmente em listas grandes. Sua complexidade média é O(n log n), tornando-o mais rápido do que muitos outros algoritmos de ordenação.
 
 **In-Place:** O Quicksort é um algoritmo "in-place", o que significa que ordena a lista diretamente sem requerer memória adicional para armazenar cópias temporárias dos elementos. Isso economiza espaço de memória.
 
@@ -138,7 +138,7 @@ Em resumo, o Quicksort geralmente tem um desempenho rápido, com complexidade \(
 
 ## Desvantagens:
 
-**Pior Caso Ineficiente:** O Quicksort pode ser muito ineficiente no pior caso, quando o pivô é escolhido inadequadamente e resulta em muitas partições desbalanceadas. Nesse caso, a complexidade é \(O(n^2)\), tornando-o mais lento do que algoritmos como o Merge Sort.
+**Pior Caso Ineficiente:** O Quicksort pode ser muito ineficiente no pior caso, quando o pivô é escolhido inadequadamente e resulta em muitas partições desbalanceadas. Nesse caso, a complexidade é O(n^2), tornando-o mais lento do que algoritmos como o Merge Sort.
 
 **Não é Estável:** O Quicksort não é um algoritmo de ordenação estável, o que significa que a ordem relativa dos elementos iguais não é preservada após a ordenação. Isso pode ser um problema em algumas aplicações.
 
