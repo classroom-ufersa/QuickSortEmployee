@@ -226,16 +226,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
      // Formatar coluna de salário
-     const celualaSalarios = tbody.querySelectorAll('tr td:nth-child(3)'); // Coluna de salário é a terceira coluna
+     const celualaSalarios = tbody.querySelectorAll('tr td:nth-child(3)'); 
      celualaSalarios.forEach(cell => {
         const valorSalario = parseFloat(cell.textContent.replace('R$', '').replace('.', '').replace(',', '.').trim());
         cell.textContent = formataSalario(valorSalario);
     });    
-    // Adicionar "R$" à coluna de salário após a ordenação
+        
     for (let row of linhas) {
-        const celulaSalario = row.cells[2]; // Supondo que o salário esteja na terceira coluna
+        const celulaSalario = row.cells[2]; 
 
-        // Verifica se o "R$" já foi adicionado
         if (!celulaSalario.textContent.startsWith('R$')) {
             const valorSalario = celulaSalario.textContent;
             celulaSalario.textContent = `R$ ${valorSalario}`;
