@@ -1,9 +1,39 @@
-#include "funcionario.c"
+#include "funcionario.h"
+
+int testeFormato(char *valor) {
+    int i;
+    for (i = 0; valor[i] != '\0'; i++) {
+        if (!(valor[i] >= '0' && valor[i] <= '9')) {
+            return 1;   // a entrada possui outros caracteres além de números
+        }
+    }
+    return 0;   // a entrada só possui números
+}
+
+int testeInput(char *op) {
+    scanf(" %2[^\n]", op); // recebe o input
+
+    if (strlen(op) > 1) {
+        printf("\nDigite apenas um caracter\n");
+        return 0;
+    }
+    else {
+        if (testeFormato(op) == 1) {
+            return 0;
+        }
+    }
+
+    return atoi(op);
+}
+
+
 
 int main(void)
 {
     Funcionario *funcionario = NULL;
-    int n = 0, opcao;
+    int n = 0;
+    char opcao[3];
+    int entrada;
     int valorValido = 0;
     do
     {
@@ -20,33 +50,34 @@ int main(void)
         printf("Escolha uma opcao: ");
         while (!valorValido)
         {
-            if (scanf("%d", &opcao) == 1)
+            entrada = testeInput(opcao);
+            if (entrada != 0)
             {
                 // A leitura foi bem-sucedida, o valor é um número inteiro
-                if (opcao >= 1 && opcao <= 3)
+                if (entrada >= 1 && entrada <= 3)
                 {
                     // Verifica se o número é menor ou igual a 3
                     valorValido = 1;
                 }
                 else
                 {
-                    printf("Digite uma das opcoes do menu.\n");
+                    printf("Digite uma das opcoes do menu (1 ou 2).\n");
                 }
             }
             else
             {
                 // A leitura não foi bem-sucedida, o valor não é um número inteiro
-                printf("Digite uma das opcoes do menu.\n");
+                printf("Digite uma das opcoes do menu (1 ou 2).\n");
                 while (getchar() != '\n')
                     ;
             }
         }
         valorValido = 0;
 
-        switch (opcao)
+        switch (entrada)
         {
         case 1:
-            while (opcao != 2)
+            while (entrada != 2)
             {
                 funcionario = (Funcionario *)realloc(funcionario, (n + 1) * sizeof(Funcionario));
 
@@ -62,10 +93,11 @@ int main(void)
                 printf("Registrar novo funcionario?\n1 = Sim\t2 = Nao: ");
                 while (!valorValido)
                 {
-                    if (scanf("%d", &opcao) == 1)
+                    entrada = testeInput(opcao);
+                    if (entrada != 0)
                     {
                         // A leitura foi bem-sucedida, o valor é um número inteiro
-                        if (opcao == 1 || opcao == 2)
+                        if (entrada == 1 || entrada == 2)
                         {
                             valorValido = 1; // Se o usuário escolher 1, o loop continua
                         }
@@ -97,7 +129,7 @@ int main(void)
             printf("Encerrando o programa...\n");
             break;
         }
-    } while (opcao != 3);
+    } while (entrada != 3);
 
     free(funcionario);
 
