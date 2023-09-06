@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./build/styles/main.css">
+</head>
+<body>
+    <header class="bg-dark p-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center">
+                    <h3 class="m-0 text-white">RH Planilhas</h3>
+                    <h6 class="ms-5 mb-0 text-white"> <i class="bi bi-building me-2"></i> Ufersa</h6>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <p class="me-4 mb-0 text-white">Pedro Raulino</p>
+                    <img src="./source/images/bird-ga5d9ed257_1920.jpg" class="image-container" alt="">
+                </div>
+            </div>    
+        </div>
+    </header>
+    <section class="align-items-center" id="bemVindo">
+        <div class="container">
+            <h2 class="text-center h1">Bem vindo, <strong>Pedro</strong> </h2>
+            <h5 class="text-center mt-5">Para começar, selecione uma Planilha ou crie uma nova</h5>
+            <div class="d-flex justify-content-center mt-5">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" id="aquivoEnviado" name="aquivoEnviado" accept=".xlsx">
+                    <label for="aquivoEnviado" id="customUploadButton" class="btn btn-dark">Selecionar Planilha</label>
+                </form> 
+                <p class="m-0 me-5 ms-5 p-0" style="vertical-align:middle"> ou </p>                                                                         
+                <button class="btn btn-primary" id="criarPlanilha">+ Criar</button>
+            </div>
+        </div>
+    </section>
+    <div id="tabela" style="display: none;">
+    <section class="mt-5" id="cardsInfos">
+        <div class="container">
+            <div class="row container">
+                <div class="card col-md-3 p-3 align-content-center w-auto bg-dark me-md-5">
+                    <h6 class="text-white">Funcionários</h6>
+                    <h2 id="totalFuncionarios" class="text-center fw-bold text-white mb-0">0</h2>
+                </div>
+                <div id="folhaSalarial" class="card col-md-3 p-3 align-content-center w-auto bg-dark">
+                    <h6 class="text-white">Folha Salárial</h6>
+                    <h2 class="text-center fw-bold text-white mb-0">R$ 0.00</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="form">
+        <div class="container mt-5">
+            <form id="formTabela" class="d-flex align-items-end">
+                <div class="w-100 me-5">
+                    <label class="form-label" for="nome">Nome</label>
+                    <input id="name" type="name" class="form-control">
+                </div>
+                <div class="w-100 me-5">
+                    <label class="form-label" for="cargo">Cargo</label>
+                    <input id="cargo" type="name" class="form-control">
+                </div>
+                <div class="w-100 me-5">
+                    <label class="form-label" for="salario">Salário</label>
+                    <input id="salario" type="text" step="0.01" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary h-100">Enviar</button>
+            </form> 
+        </div>
+    </section>
+    <section id="tabela">
+        <div class="container mt-5 mb-5">
+            <table class="table table-bordered table-striped" id="dadosDaTabela" style="display: none;">
+                <tbody></tbody>
+            </table>
+            <div class="d-flex justify-content-center mt-5">
+                <button id="downloadButton" class="btn btn-primary">Baixar Planilha</button>
+            </div>
+        </div>
+    </section>
+</div>
+    <script type="module" src="./source/scripts/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

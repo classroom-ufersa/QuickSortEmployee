@@ -1,0 +1,75 @@
+@use 'var';
+
+body{
+    background-color: var.$corPrincipal;
+}
+
+.image-container {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    border: 2px solid #EA8C0C; /* Adding a border for visualization */
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+#aquivoEnviado {
+    display: none;
+}
+
+#customUploadButton {
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.tamanho{
+    width: 10px;
+}
+
+button{
+    border: none;
+    background-color: transparent;
+}
+.bi-trash{
+    color: red;
+}
+.bi-pencil-square{
+    color:#EA8C0C;
+}
+.btn-primary{
+    border: none;
+    background-color:#EA8C0C;
+    &:hover{
+        background-color:#fba225;
+    }
+}
+td  {
+    vertical-align: middle;
+  }
+
+  table{
+    border-radius: 5px;
+  }
+
+  p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #bemVindo {
+    height: calc(100vh - 84px);
+    display: flex;
+  }
+
+  .btn-primary:focus{
+    background-color: #000 !important; 
+  }
